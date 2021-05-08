@@ -1,4 +1,11 @@
+import { useRef } from "react"
+
 export default function MemberRegister() {
+    // let inputRef = useRef(0);
+    // console.log(inputRef);
+    // function onSubmit() {
+    //     inputRef.current.value
+    // }
     return (
         <section>
             <div className="container">
@@ -51,7 +58,7 @@ export default function MemberRegister() {
                             <p>Ý kiến cá nhân</p>
                             <input type="text" placeholder="Mong muốn cá nhân và lịch bạn có thể học." />
                         </label>
-                        <div className="btn main rect">đăng ký</div>
+                        <div className="btn main rect" >đăng ký</div>
                     </div>
                 </div>
             </div>

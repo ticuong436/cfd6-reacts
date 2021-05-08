@@ -1,4 +1,18 @@
+import { NavLink, useHistory } from 'react-router-dom'
+
 export function Nav() {
+    let history = useHistory();
+    function closeNav(e) {
+        document.body.classList.remove('menu-is-show')
+        document.querySelector('.loading-page').style.transform = 'scale(25)';
+        e.preventDefault();
+        setTimeout(() => {
+            history.push(e.target.href.replace(window.location.origin, ''));
+            document.querySelector('.loading-page').style.transform = 'scale(0)';
+        }, 1000)
+
+
+    }
     return (
         <nav className="nav">
             <ul>
@@ -6,20 +20,20 @@ export function Nav() {
                     <a href="#">Đăng nhập</a>
                     <a href="#">Đăng ký</a>
                 </li>
-                <li className="active">
-                    <a href="#">Trang chủ</a>
+                <li >
+                    <NavLink exact onClick={closeNav} exact to="/">Trang chủ</NavLink>
                 </li>
                 <li>
-                    <a href="#">CFD Team</a>
+                    <NavLink onClick={closeNav} to="team">CFD Team</NavLink>
                 </li>
                 <li>
-                    <a href="#">Khóa Học</a>
+                    <NavLink onClick={closeNav} to="course-detail">Khóa Học</NavLink>
                 </li>
                 <li>
-                    <a href="#">Dự Án</a>
+                    <NavLink onClick={closeNav} to="project">Dự Án</NavLink>
                 </li>
                 <li>
-                    <a href="#">Liên hệ</a>
+                    <NavLink onClick={closeNav} to="lien-he">Liên hệ</NavLink>
                 </li>
             </ul>
         </nav>

@@ -1,0 +1,39 @@
+.register-course .wrap label {
+    flex-wrap: wrap;
+    .error-text {
+        color: red;
+        font-size: 14px;
+        width: 100% !important;
+        padding-left: 180px;
+        font-style: italic;
+    }
+}
+
+.profile .tab .tab-content .tab1 label {
+    flex-wrap: wrap;
+    .error-text {
+        color: red;
+        font-size: 14px;
+        width: 100% !important;
+        padding-left: 160px;
+        font-style: italic;
+    }
+}
+.nav ul li.active {
+    background: unset;
+}
+.nav ul li a.active {
+    background: #00afab;
+    color: white;
+}
+.loading-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 100%;
+    background: #00afab;
+    width: 100px;
+    height: 100px;
+    transform: scale(0);
+    transition: all 0.5s ease;
+}

@@ -1,8 +1,15 @@
+import { Link } from 'react-router-dom'
 export function Header() {
+    function menuOpen() {
+        document.body.classList.toggle('menu-is-show')
+    }
+    function closeButton() {
+        document.body.classList.remove('menu-is-show')
+    }
     return (
         <header id="header">
             <div className="wrap">
-                <div className="menu-hambeger">
+                <div className="menu-hambeger" onClick={menuOpen}>
                     <div className="button">
                         <span />
                         <span />
@@ -10,10 +17,10 @@ export function Header() {
                     </div>
                     <span className="text">menu</span>
                 </div>
-                <a href="#" className="logo">
+                <Link to="/" className="logo">
                     <img src="img/logo.svg" alt="" />
                     <h1>CFD</h1>
-                </a>
+                </Link>
                 <div className="right">
                     <div className="have-login">
                         <div className="account">
@@ -27,9 +34,9 @@ export function Header() {
                         <div className="hamberger">
                         </div>
                         <div className="sub">
-                            <a href="#">Khóa học của tôi</a>
-                            <a href="#">Thông tin tài khoản</a>
-                            <a href="#">Đăng xuất</a>
+                            <Link to="/profile">Khóa học của tôi</Link>
+                            <Link to="/profile">Thông tin tài khoản</Link>
+                            <Link to="/">Đăng xuất</Link>
                         </div>
                     </div>
                     {/* <div class="not-login bg-none">

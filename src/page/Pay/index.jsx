@@ -9,7 +9,7 @@ export default function Pay() {
                             <h2>Hình thức thanh toán</h2>
                             <h3><strong>Hình thức chuyển khoản</strong></h3>
                             <p>- Thẻ ATM nội địa; <br />
-                  - Thẻ Visa, Master, JCB...; <br />
+                            - Thẻ Visa, Master, JCB...; <br />
                   - Ví MOMO.</p>
                             <p>CFD chỉ gửi xác nhận sau khi học phí được chuyển đến tài khoản của CFD và sẽ không chịu trách
                             nhiệm
@@ -36,7 +36,7 @@ export default function Pay() {
                             <p>CFD không chịu trách nhiệm hoàn trả học phí trong bất kỳ trường hợp nào trừ khi
                             dịch vụ của CFD bị gián đoạn, trục trặc do lỗi từ phía CFD gây ảnh hưởng nghiêm trọng đến
                             quyền
-                  lợi của học viên.</p>
+                             lợi của học viên.</p>
                         </div>
                         <div className="section">
                             <h2>Chính sách ưu đãi</h2>
