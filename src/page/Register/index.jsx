@@ -1,71 +1,45 @@
-// import MemberRegister from "./Component/MemberRegister";
 
 import { useRef, useState } from "react"
+import useFormValidate from "../../hook/useFormValidate"
 
 export default function Register() {
-    // let [name, setName] = useState('');
-    // // let inputRef = useRef(0)
-    // // console.log(inputRef);
 
-    let [form, setForm] = useState({
+    let { form, inputChange, error, check } = useFormValidate({
         name: '',
         phone: '',
         email: '',
         urlfb: '',
         option: ''
-    });
-
-    let [error, setError] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        urlfb: ''
+    }, {
+        rule: {
+            name: {
+                required: true
+            },
+            phone: {
+                required: true,
+                pattern: 'phone'
+            },
+            email: {
+                required: true,
+                pattern: 'email'
+            },
+            urlfb: {
+                pattern: 'url'
+            },
+            option: {
+                required: true
+            }
+        }
     })
+
     function onSubmit() {
-        let errorObj = {}
-
-        if (!form.name.trim()) {
-            errorObj.name = "Bạn chưa nhập họ và tên"
-
-        }
-        if (!form.phone) {
-            errorObj.phone = "Vui lòng nhập số điện thoại"
-        } else if (!/(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(form.phone)) {
-            errorObj.phone = "Số điện thoại không đúng định dạng"
-        }
-
-        if (!form.email) {
-            errorObj.email = "Vui lòng nhập Email"
-        } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email)) {
-            errorObj.email = "Email không đúng định dạng"
-        }
-
-
-        // if (!/(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?/.test(form.urlfb)) {
-        //     errorObj.urlfb = "Facebook không đúng định dạng"
-        // }
-        // if (!form.option) {
-        //     alert('opion')
-        //     return
-        // }
-        setError(errorObj);
+        let errorObj = check()
         if (Object.keys(errorObj).length === 0) {
             console.log(form);
         }
 
     }
 
-
-
-    function inputOnChange(e) {
-
-        let name = e.target.name;
-        let value = e.target.value;
-        setForm({
-            ...form,
-            [name]: value
-        })
-    }
     return (
         <main className="register-course" id="main">
             <section>
@@ -81,28 +55,28 @@ export default function Register() {
                         <div className="form">
                             <label>
                                 <p>Họ và tên<span>*</span></p>
-                                <input value={form.name} name="name" onChange={inputOnChange} type="text" placeholder="Họ và tên bạn" />
+                                <input value={form.name} name="name" onChange={inputChange} type="text" placeholder="Họ và tên bạn" />
                                 {
                                     error.name && <p className="error-text">{error.name}</p>
                                 }
                             </label>
                             <label>
                                 <p>Số điện thoại<span>*</span></p>
-                                <input value={form.phone} name="phone" onChange={inputOnChange} type="text" placeholder="Số điện thoại" />
+                                <input value={form.phone} name="phone" onChange={inputChange} type="text" placeholder="Số điện thoại" />
                                 {
                                     error.phone && <p className="error-text">{error.phone}</p>
                                 }
                             </label>
                             <label>
                                 <p>Email<span>*</span></p>
-                                <input value={form.email} name="email" onChange={inputOnChange} type="text" placeholder="Email của bạn" />
+                                <input value={form.email} name="email" onChange={inputChange} type="text" placeholder="Email của bạn" />
                                 {
                                     error.email && <p className="error-text">{error.email}</p>
                                 }
                             </label>
                             <label>
                                 <p>URL Facebook<span>*</span></p>
-                                <input value={form.url} name="url" onChange={inputOnChange} type="text" placeholder="https://facebook.com" />
+                                <input value={form.url} name="url" onChange={inputChange} type="text" placeholder="https://facebook.com" />
                                 {
                                     error.urlfb && <p className="error-text">{error.urlfb}</p>
                                 }
@@ -129,7 +103,7 @@ export default function Register() {
                             </label>
                             <label>
                                 <p>Ý kiến cá nhân</p>
-                                <input value={form.option} name="option" onChange={inputOnChange} type="text" placeholder="Mong muốn cá nhân và lịch bạn có thể học." />
+                                <input value={form.option} name="option" onChange={inputChange} type="text" placeholder="Mong muốn cá nhân và lịch bạn có thể học." />
                             </label>
                             <div className="btn main rect" onClick={onSubmit} >đăng ký</div>
                         </div>

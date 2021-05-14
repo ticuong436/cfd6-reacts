@@ -20,7 +20,7 @@ export default function Testimonial() {
                                     <div className="content">
                                         Mentor có tâm, tận tình. Mình tìm được hướng đi trong lập trình front-end qua
                                         khóa học. Like cho 4 mentor.
-                      </div>
+                                 </div>
                                     <div className="bottom">
                                         <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
                                         <span>09/10/2020</span>
@@ -38,7 +38,7 @@ export default function Testimonial() {
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin libero
                                         id magna finibus, in maximus urna tincidunt. Nam at leo lacinia, interdum dolor
                                         in, molestie lectus. Aenean porttitor purus at purus euismod tristique
-                      </div>
+                                  </div>
                                     <div className="bottom">
                                         <a href="#" target="_blank"><img src="img/facebook.svg" alt="" /></a>
                                         <span>01/10/2020</span>

@@ -1,11 +1,11 @@
-import { Footer, Header, Nav } from "./component";
+import { CourselItem, Footer, Header, Nav } from "./component";
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Home from "./page/home";
 
 import Project from "./page/Projectpage";
-import Team from "./page/team";
+import Team from "./page/Team";
 import Pay from "./page/Pay";
 import Register from "./page/Register";
 import Profile from "./page/Profile";
@@ -16,6 +16,8 @@ import Email from "./page/Email"
 import Coin from "./page/IntroCoin";
 import './assets/style/custom.scss'
 import Cooperate from "./page/Cooperate";
+import PopupLogin from "./component/PopupLogin"
+import Course from "./page/Course"
 
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
       <Header />
       <Nav />
 
+      <PopupLogin />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/team' component={Team} />
@@ -36,10 +39,16 @@ function App() {
         <Route path='/project' component={Project} />
         <Route path='/faq' component={Faq} />
         <Route path='/email' component={Email} />
-        <Route path='/lien-he' component={Cooperate} />
+        <Route path='/contact' component={Cooperate} />
+        <Route path='/coin' component={Coin} />
+        <Route path='/login' component={PopupLogin} />
+        <Route path='/course' component={Course} />
+        <Route path='/' component={Error} />
+
 
       </Switch>
       <Footer />
+
 
 
 

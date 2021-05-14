@@ -1,4 +1,4 @@
-export default function Section3() {
+export default function Course() {
     return (
         <section className="section-3">
             <div className="container">

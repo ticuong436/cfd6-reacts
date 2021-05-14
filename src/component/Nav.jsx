@@ -14,6 +14,7 @@ export function Nav() {
 
     }
     return (
+
         <nav className="nav">
             <ul>
                 <li className="li_login">
@@ -37,5 +38,7 @@ export function Nav() {
                 </li>
             </ul>
         </nav>
+
+
     )
 }

@@ -8,14 +8,11 @@ import { useRouteMatch, Switch, Route } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
 export default function Profile() {
-    let [tabActive, setTabActive] = useState(0);
+
     let { path } = useRouteMatch()
 
 
-    function setTab(e, index) {
-        e.preventDefault();
-        setTabActive(index)
-    }
+
     return (
         <main className="profile" id="main">
             <section>

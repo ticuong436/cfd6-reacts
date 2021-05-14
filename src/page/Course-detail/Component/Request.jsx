@@ -1,4 +1,6 @@
-export default function Section2() {
+import Accordion from "./Accordion"
+
+export default function Request() {
     return (
         <section className="section-2">
             <div className="container">
@@ -10,66 +12,59 @@ export default function Section2() {
                     <img src="img/course-detail-img.png" alt="" />
                 </div>
                 <h3 className="title">nội dung khóa học</h3>
-                <div className="accordion">
-                    <div className="accordion__title">
-                        <div className="date">Ngày 1</div>
-                        <h3>Giới thiệu HTML, SEO, BEM.</h3>
-                    </div>
-                    <div className="content">
-                        I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                        some tangible benefits over alternatives like VueJS for simple page interactions.
-                </div>
-                </div>
-                <div className="accordion">
-                    <div className="accordion__title">
-                        <div className="date">Ngày 2</div>
-                        <h3>CSS, CSS3, Flexbox, Grid</h3>
-                    </div>
-                    <div className="content">
-                        I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                        some tangible benefits over alternatives like VueJS for simple page interactions.
-                </div>
-                </div>
-                <div className="accordion">
-                    <div className="accordion__title">
-                        <div className="date">Ngày 3</div>
-                        <h3>Media Queries</h3>
-                    </div>
-                    <div className="content">
-                        I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                        some tangible benefits over alternatives like VueJS for simple page interactions.
-                </div>
-                </div>
-                <div className="accordion">
-                    <div className="accordion__title">
-                        <div className="date">Ngày 4</div>
-                        <h3>Boostrap 4</h3>
-                    </div>
-                    <div className="content">
-                        I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                        some tangible benefits over alternatives like VueJS for simple page interactions.
-                </div>
-                </div>
-                <div className="accordion">
-                    <div className="accordion__title">
-                        <div className="date">Ngày 5</div>
-                        <h3>Thực hành dự án website Landing Page</h3>
-                    </div>
-                    <div className="content">
-                        I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                        some tangible benefits over alternatives like VueJS for simple page interactions.
-                </div>
-                </div>
-                <div className="accordion">
-                    <div className="accordion__title">
-                        <div className="date">Ngày 6</div>
-                        <h3>Cài đặt Grunt và cấu trúc thư mục dự án</h3>
-                    </div>
-                    <div className="content">
-                        I'd like to demonstrate a powerful little pattern called “Server-Fetched Partials” that offers
-                        some tangible benefits over alternatives like VueJS for simple page interactions.
-                </div>
-                </div>
+                <Accordion
+                    day='ngày 1'
+                    course='Giới thiệu HTML, SEO, BEM.'
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+                <Accordion
+                    day='Ngày 2'
+                    course='CSS, CSS3, Flexbox, Grid.'
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+
+                <Accordion
+                    day='Ngày 3'
+                    course='Media Queries'
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+
+                <Accordion
+                    day='Ngày 4'
+                    course='Boostrap 4'
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+
+                <Accordion
+                    day='Ngày 5'
+                    course='Thực hành dự án website Landing Page'
+
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+
+                <Accordion
+                    day='Ngày 6'
+                    course='Cài đặt Grunt và cấu trúc thư mục dự án'
+
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+
+                <Accordion
+                    day='Ngày 7'
+                    course='Cài đặt Grunt và cấu trúc thư mục dự án'
+
+                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
+                some tangible benefits over alternatives like VueJS for simple page interactions'
+                />
+
+
+
                 <h3 className="title">yêu cầu cần có</h3>
                 <div className="row row-check">
                     <div className="col-md-6">Đã từng học qua HTML, CSS</div>
@@ -126,6 +121,6 @@ export default function Section2() {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

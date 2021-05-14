@@ -1,5 +1,6 @@
 import React from "react";
-import { CourselItem } from "../../../component";
+import { CourselItem } from "../../component";
+
 // import { CourseItem } from "../../../component"
 
 
