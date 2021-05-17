@@ -1,54 +1,43 @@
 import { useState, useReducer } from "react"
 import useFormValidate from "../../../hook/useFormValidate"
-function reducer(state, action) {
 
-    switch (action.type) {
-        case 'INPUT_CHANGE':
-            return {
-                ...state,
-                form: {
-                    ...state.form,
-                    ...action.payload
-                }
-            }
-        case 'SET_ERROR':
-            return {
-                ...state,
-                error: action.payload
-            }
-
-
-    }
-    return state;
-
-
-}
 export default function Infor() {
 
-    // let [state, dispath] = useReducer(reducer, {
-    //     form: {
-    //         name: '',
-    //         phone: '',
-    //         email: '',
-    //         urlfb: '',
-    //         skype: ''
-
-    //     },
-    //     error: {
-    //         name: '',
-    //         phone: '',
-    //         email: '',
-    //         urlfb: '',
-    //         skype: ''
-    //     }
-    // })
     let { form, inputChange, error, check } = useFormValidate({
         name: '',
         phone: '',
         email: '',
-        urlfb: '',
+        url: '',
         skype: ''
-    }, {})
+    }, {
+        rule: {
+            name: {
+                required: true
+            },
+            phone: {
+                required: true,
+                pattern: 'phone'
+            },
+            url: {
+                required: true,
+                pattern: /^(?:http(s)?:\/\/)?www.facebook.com\/\/[\w.-]+$/i
+            },
+
+        },
+        message: {
+            name: {
+                required: 'Họ và tên không được để trống'
+            },
+            phone: {
+                required: 'Số điênh thoại không được để trống',
+                pattern: 'Phải là số điện thoại Việt Nam'
+            },
+            url: {
+                required: 'Link FB không được để trống',
+                pattern: 'Đây không phải là Link FaceBook'
+            }
+        }
+    })
 
 
 
@@ -86,10 +75,10 @@ export default function Infor() {
             </label>
             <label>
                 <p>Facebook<span>*</span></p>
-                <input value={form.urlfb} name="urlfb" onChange={inputChange} type="text" placeholder="Facebook url" />
+                <input value={form.url} name="url" onChange={inputChange} type="text" placeholder="Facebook url" />
 
                 {
-                    error.urlfb && <p className="error-text">{error.urlfb}</p>
+                    error.url && <p className="error-text">{error.url}</p>
                 }
             </label>
             <label>

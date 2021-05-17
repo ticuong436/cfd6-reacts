@@ -34,7 +34,7 @@ export function Nav() {
                     <NavLink onClick={closeNav} to="project">Dự Án</NavLink>
                 </li>
                 <li>
-                    <NavLink onClick={closeNav} to="lien-he">Liên hệ</NavLink>
+                    <NavLink onClick={closeNav} to="contact">Liên hệ</NavLink>
                 </li>
             </ul>
         </nav>

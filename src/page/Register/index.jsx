@@ -8,8 +8,9 @@ export default function Register() {
         name: '',
         phone: '',
         email: '',
-        urlfb: '',
+        url: '',
         option: ''
+
     }, {
         rule: {
             name: {
@@ -23,12 +24,34 @@ export default function Register() {
                 required: true,
                 pattern: 'email'
             },
-            urlfb: {
-                pattern: 'url'
+            url: {
+                required: true,
+                pattern: /^(?:http(s)?:\/\/)?www.facebook.com\/\/[\w.-]+$/i
+
             },
             option: {
                 required: true
+            },
+
+        },
+        message: {
+            name: {
+                required: 'Họ và tên không được để trống'
+            },
+            phone: {
+                required: 'Số điện thoại không được để trống',
+                pattern: 'Phải là số điện thoại Việt Nam'
+            },
+            email: {
+                required: 'Email không được để trống',
+                pattern: 'Địa chỉ Email không đúng'
+            },
+            url: {
+                required: 'Link FB không được để trống',
+                pattern: 'Đây không phải là Link FaceBook'
             }
+
+
         }
     })
 
@@ -78,7 +101,7 @@ export default function Register() {
                                 <p>URL Facebook<span>*</span></p>
                                 <input value={form.url} name="url" onChange={inputChange} type="text" placeholder="https://facebook.com" />
                                 {
-                                    error.urlfb && <p className="error-text">{error.urlfb}</p>
+                                    error.url && <p className="error-text">{error.url}</p>
                                 }
                             </label>
                             <label className="disable">

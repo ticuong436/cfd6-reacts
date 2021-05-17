@@ -37,3 +37,10 @@
     transform: scale(0);
     transition: all 0.5s ease;
 }
+.error-text {
+    color: red;
+    font-size: 14px;
+    width: 100% !important;
+    margin-top: -12px;
+    font-style: italic;
+}

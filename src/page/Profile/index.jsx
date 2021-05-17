@@ -3,28 +3,23 @@ import MyCourse from "./Component/MyCourse"
 import ProfileProject from "./Component/ProfileProject"
 import Lib from "./Component/Lib"
 import Coin from "./Component/Coin"
-import { useState } from "react"
-import { useRouteMatch, Switch, Route } from 'react-router-dom'
+import { useState, useContext } from "react"
+import { Context } from '../../App'
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
+import TopInfor from "./Component/TopInfor"
 
 export default function Profile() {
 
     let { path } = useRouteMatch()
 
+    let { login } = useContext(Context)
 
-
+    if (!login) return <Redirect path='/' />
     return (
         <main className="profile" id="main">
             <section>
-                <div className="top-info">
-                    <div className="avatar">
-                        {/* <span class="text">H</span> */}
-                        <img src="img/avatar-lg.png" alt="" />
-                        <div className="camera" />
-                    </div>
-                    <div className="name">trần nghĩa</div>
-                    <p className="des">Thành viên của team CFD1-OFFLINE</p>
-                </div>
+                <TopInfor />
                 <div className="container">
                     <div className="tab">
                         <div className="tab-title">

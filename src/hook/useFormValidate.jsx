@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+let emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
+    phonePattern = /(84|0[3|5|7|8|9])+([0-9]{8})\b/i,
+    urlPattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i
 export default function useFormValidate(initialForm, validate) {
     let [form, setForm] = useState(initialForm)
     let [error, setError] = useState({})
@@ -17,36 +20,47 @@ export default function useFormValidate(initialForm, validate) {
 
     function check() {
         let errorObj = {}
-        let { rule } = validate
+        let { rule, message } = validate
+        if (!message) {
+            message = {}
+        }
         for (let i in rule) {
             let r = rule[i]
-            if (r.required && !form[i]) {
-                errorObj[i] = 'Trường này không được để trống'
+            let m = message[i] || {}
+            if (r.required && !form[i]?.trim()) {
+                errorObj[i] = m?.required || 'Trường này không được để trống'
+                continue;
+            }
+            if (r.pattern && form[i]) {
+                let { pattern } = r
+                if (pattern === 'email') pattern = emailPattern
+                if (pattern === 'phone') pattern = phonePattern
+                if (pattern === 'url') pattern = urlPattern
+
+                if (!pattern?.test(form[i])) {
+                    errorObj[i] = m?.pattern || 'Trường này không đúng định dạng'
+                }
+            }
+            if (r.min) {
+                if (form[i].length < r.min) {
+                    errorObj[i] = m?.min || 'Mật khẩu không được ít hơn 6 ký tự';
+                }
+            }
+            if (r.max) {
+                if (form[i].length > r.max) {
+                    errorObj[i] = m?.max || 'Mật khẩu không được nhiều hơn 32 ký tự';
+                }
             }
         }
-        // if (!form.name.trim()) {
-        //     errorObj.name = "Bạn chưa nhập họ và tên"
 
-        // }
-        // if (!form.phone) {
-        //     errorObj.phone = "Vui lòng nhập số điện thoại"
-        // } else if (!/(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(form.phone)) {
-        //     errorObj.phone = "Số điện thoại không đúng định dạng"
-        // }
-
-        // if (!form.email) {
-        //     errorObj.email = "Vui lòng nhập Email"
-        // } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email)) {
-        //     errorObj.email = "Email không đúng định dạng"
-        // }
         setError(errorObj)
         return errorObj
     }
 
-    return (
+    return {
         form,
         error,
         inputChange,
         check
-    )
+    }
 }
