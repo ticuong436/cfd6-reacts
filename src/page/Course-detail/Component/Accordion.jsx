@@ -1,12 +1,15 @@
-export default function Accordion({ day, course, description }) {
+export default function Accordion({ day, title, content }) {
+    function toggleContent() {
+
+    }
     return (
-        <div className="accordion">
+        <div className="accordion" onClick={toggleContent} >
             <div className="accordion__title">
                 <div className="date">{day}</div>
-                <h3>{course}</h3>
+                <h3>{title}</h3>
             </div>
             <div className="content">
-                {description}
+                {content}
             </div>
         </div>
     )

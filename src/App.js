@@ -1,6 +1,7 @@
 import { CourselItem, Footer, Header, Nav } from "./component";
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Provider, useDispatch } from 'react-redux'
 
 import Home from "./page/home";
 
@@ -17,11 +18,18 @@ import Coin from "./page/IntroCoin";
 import './assets/style/custom.scss'
 import Cooperate from "./page/Cooperate";
 import PopupLogin from "./component/PopupLogin"
-import Course from "./page/Course"
+import myCourse from "./page/myCourse"
 import PrivateRouter from './component/PrivateRouter'
+import Auth from "./service/auth";
+import store from "./redux";
+import MyCourse from "./page/myCourse";
+
+
 export let Context = React.createContext({})
 
 function App() {
+
+
 
   let [state, setState] = useState({
     login: JSON.parse(localStorage.getItem('login'))
@@ -31,19 +39,27 @@ function App() {
     localStorage.setItem('login', JSON.stringify(state.login))
   }, [state.login])
 
-  function handleLogin(username, password) {
-    if (username === 'admin@gmail.com' && password === '123456') {
-      setState({
-        ...state,
-        login: {
-          name: 'Đặng Thuyền Vương',
-          avatar: '/img/avt.png'
-        }
-      })
+  async function handleLogin(username, password) {
+    try {
+      let res = await Auth.login({ username, password })
 
-    } else {
-      return 'Sai thông tin đăng nhập'
+      if (res.data) {
+        setState({
+          ...state,
+          login: res.data
+        })
+        return {
+          success: true
+        }
+      } else if (res.error) {
+        return {
+          error: res.error
+        }
+      }
+    } catch (error) {
+
     }
+
   }
   function handleLogout() {
     setState({
@@ -54,31 +70,33 @@ function App() {
   }
 
   return (
-    <Context.Provider value={{ ...state, handleLogin, handleLogout }}>
-      <BrowserRouter>
-        <Header />
-        <Nav />
-        <PopupLogin />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/team' component={Team} />
-          <Route path='/profile'>
-            <Profile />
-          </Route>
-          <Route path='/course-detail' component={CourseDetail} />
-          <Route path='/pay' component={Pay} />
-          <Route path='/register' component={Register} />
-          <Route path='/project' component={Project} />
-          <Route path='/faq' component={Faq} />
-          <Route path='/email' component={Email} />
-          <PrivateRouter path='/contact' component={Cooperate} />
-          <Route path='/coin' component={Coin} />
-          <Route path='/course' component={Course} />
-          <Route path='/' component={Error} />
-        </Switch>
-        <Footer />
-      </BrowserRouter>
-    </Context.Provider>
+    <Provider store={store}>
+      <Context.Provider value={{ ...state, handleLogin, handleLogout }}>
+        <BrowserRouter>
+          <Header />
+          <Nav />
+          <PopupLogin />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/team' component={Team} />
+            <Route path='/profile'>
+              <Profile />
+            </Route>
+            <Route path='/course-detail/:slug' component={CourseDetail} />
+            <Route path='/pay' component={Pay} />
+            <PrivateRouter path='/register/:slug' component={Register} />
+            <Route path='/project' component={Project} />
+            <Route path='/faq' component={Faq} />
+            <Route path='/email' component={Email} />
+            <PrivateRouter path='/contact' component={Cooperate} />
+            <Route path='/coin' component={Coin} />
+            <Route path='/my-course' component={MyCourse} />
+            <Route path='/' component={Error} />
+          </Switch>
+          <Footer />
+        </BrowserRouter>
+      </Context.Provider>
+    </Provider>
   )
 }
 

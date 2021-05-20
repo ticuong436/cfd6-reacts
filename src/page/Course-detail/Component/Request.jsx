@@ -1,70 +1,29 @@
+import { Link } from "react-router-dom"
 import Accordion from "./Accordion"
 
-export default function Request() {
+export default function Request({ content, long_description, slug }) {
+
     return (
         <section className="section-2">
             <div className="container">
-                <p className="des">Many Laravel apps don’t warrant the complexity of a full front-end framework like Vue or
-                React. In this series, we’ll walk through a handful of simple ways to add dynamic functionality to
-                your apps.</p>
+
                 <h2 className="title">giới thiệu về khóa học</h2>
+                <p className="des">{long_description}</p>
                 <div className="cover">
                     <img src="img/course-detail-img.png" alt="" />
                 </div>
                 <h3 className="title">nội dung khóa học</h3>
-                <Accordion
-                    day='ngày 1'
-                    course='Giới thiệu HTML, SEO, BEM.'
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
-                <Accordion
-                    day='Ngày 2'
-                    course='CSS, CSS3, Flexbox, Grid.'
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
+                {
+                    content?.map((value, i) => <Accordion
+                        key={value.content.title}
 
-                <Accordion
-                    day='Ngày 3'
-                    course='Media Queries'
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
+                        title={value.title}
+                        day={'ngày' + ' ' + (i + 1)}
+                        {...value}
+                        content={value.content}
 
-                <Accordion
-                    day='Ngày 4'
-                    course='Boostrap 4'
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
-
-                <Accordion
-                    day='Ngày 5'
-                    course='Thực hành dự án website Landing Page'
-
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
-
-                <Accordion
-                    day='Ngày 6'
-                    course='Cài đặt Grunt và cấu trúc thư mục dự án'
-
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
-
-                <Accordion
-                    day='Ngày 7'
-                    course='Cài đặt Grunt và cấu trúc thư mục dự án'
-
-                    description='Id like to demonstrate a powerful little pattern called Server-Fetched Partials that offers
-                some tangible benefits over alternatives like VueJS for simple page interactions'
-                />
-
-
-
+                    />)
+                }
                 <h3 className="title">yêu cầu cần có</h3>
                 <div className="row row-check">
                     <div className="col-md-6">Đã từng học qua HTML, CSS</div>
@@ -115,7 +74,7 @@ export default function Request() {
                     <div className="user">
                         <img src="img/user-group-icon.png" alt="" /> 12 bạn đã đăng ký
                 </div>
-                    <div className="btn main btn-register round">đăng ký</div>
+                    <Link to={`/register/${slug}`} className="btn main btn-register round">đăng ký</Link >
                     <div className="btn-share btn overlay round btn-icon">
                         <img src="img/facebook.svg" alt="" />
                     </div>

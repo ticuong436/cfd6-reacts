@@ -1,6 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import useAuth from '../hook/useAuth'
+import { logoutAction } from '../redux/actions/authAction'
 
 export function Header({ }) {
     function menuOpen() {
@@ -9,7 +11,15 @@ export function Header({ }) {
     function popupLogin() {
         document.querySelector('.popup-login').style.display = 'flex'
     }
-    let { login, handleLogout } = useAuth()
+    let { login } = useSelector(store => store.authReducer)
+    let dispath = useDispatch()
+    function logout(e) {
+        e.preventDefault()
+        dispath(
+            logoutAction()
+        )
+    }
+    // let { login, handleLogout } = useAuth()
     return (
         <>
             <header id="header">
@@ -40,9 +50,9 @@ export function Header({ }) {
                                 <div className="hamberger">
                                 </div>
                                 <div className="sub">
-                                    <Link to="/course">Khóa học của tôi</Link>
+                                    <Link to="/my-course">Khóa học của tôi</Link>
                                     <Link to="/profile">Thông tin tài khoản</Link>
-                                    <Link to="/" onClick={e => { e.preventDefault(); handleLogout() }}>Đăng xuất</Link>
+                                    <Link to="/" onClick={logout}>Đăng xuất</Link>
                                 </div>
                             </div> :
                                 <div class="not-login bg-none">

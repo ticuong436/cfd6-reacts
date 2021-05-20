@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import reactDOM from 'react-dom'
-
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import useAuth from '../hook/useAuth'
 import useFormValidate from '../hook/useFormValidate'
+import { loginAction } from '../redux/actions/authAction'
+import Auth from '../service/auth'
 export default function PopupLogin() {
+    // let [loginError, setLoginError] = useState()
     let { form, error, inputChange, check } = useFormValidate({
         username: '',
         password: ''
@@ -21,20 +25,39 @@ export default function PopupLogin() {
         },
 
     })
-    let { handleLogin } = useAuth()
+    let dispath = useDispatch()
+    let { loginError } = useSelector(store => store.authReducer)
+    // let { handleLogin } = useAuth()
     function close() {
         document.querySelector('.popup-login').style.display = 'none'
     }
 
-    function loginHandle() {
+    async function loginHandle() {
         let error = check();
         if (Object.keys(error).length === 0) {
-            let res = handleLogin(form.username, form.password)
-            if (res) {
-                alert(res)
-            } else {
-                close()
-            }
+            // let res = await Auth.login({
+            //     username: form.username,
+            //     password: form.password
+            // })
+            dispath(loginAction({
+                username: form.username,
+                password: form.password
+            }, close))
+            // if (res.data) {
+            //     close()
+            //     // dispath({
+            //     //     type: 'LOGIN',
+            //     //     payload: res.data
+            //     // })
+
+            // } else if (res.error) {
+            //     setLoginError(res.error)
+            // }
+            // if (res) {
+            //     alert(res)
+            // } else {
+            //     // close()
+            // }
 
 
         }
@@ -46,6 +69,7 @@ export default function PopupLogin() {
                 {/* login-form */}
                 <div className="ct_login" style={{ display: 'block' }}>
                     <h2 className="title">Đăng nhập</h2>
+                    {loginError && <p className="error-text">{loginError}</p>}
                     <input type="text" value={form.username} name="username" onChange={inputChange} placeholder="Email / Số điện thoại" />
                     {
                         error.username && <p className="error-text">{error.username}</p>
