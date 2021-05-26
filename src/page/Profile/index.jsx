@@ -8,14 +8,15 @@ import { Context } from '../../App'
 import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import TopInfor from "./Component/TopInfor"
+import { useSelector } from "react-redux"
 
 export default function Profile() {
 
     let { path } = useRouteMatch()
 
-    let { login } = useContext(Context)
+    let { login } = useSelector(store => store.authReducer)
 
-    if (!login) return <Redirect path='/' />
+
     return (
         <main className="profile" id="main">
             <section>

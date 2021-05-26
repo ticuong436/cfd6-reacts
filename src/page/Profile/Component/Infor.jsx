@@ -1,10 +1,16 @@
 import { useState, useReducer } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import useFormValidate from "../../../hook/useFormValidate"
+import { loginAction, updateAction } from "../../../redux/actions/authAction"
+import authReducer from "../../../redux/reducer/coutReducer"
+import Auth from "../../../service/auth"
 
 export default function Infor() {
 
+    let dispath = useDispatch()
+    let { login } = useSelector(store => store.authReducer)
     let { form, inputChange, error, check } = useFormValidate({
-        name: '',
+        name: login.name,
         phone: '',
         email: '',
         url: '',
@@ -20,7 +26,7 @@ export default function Infor() {
             },
             url: {
                 required: true,
-                pattern: /^(?:http(s)?:\/\/)?www.facebook.com\/\/[\w.-]+$/i
+                pattern: /^(?:http(s)?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/i
             },
 
         },
@@ -41,14 +47,16 @@ export default function Infor() {
 
 
 
-
-    function Save() {
-
+    const [success, setSuccess] = useState()
+    async function Save() {
         let errorObj = check()
         if (Object.keys(errorObj).length === 0) {
             console.log(form);
+            dispath(updateAction(form))
+
         }
     }
+
 
     return (
         <div className="tab1">
@@ -68,7 +76,7 @@ export default function Infor() {
             </label>
             <label>
                 <p>Email<span>*</span></p>
-                <input name="email" onChange={inputChange} value="vuong.dang@dna.vn" disabled type="text" />
+                <input name="email" onChange={inputChange} value={form.email} placeholder="abc@gmail.com" type="text" />
                 {
                     error.email && <p className="error-text">{error.email}</p>
                 }

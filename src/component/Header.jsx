@@ -51,7 +51,7 @@ export function Header({ }) {
                                 </div>
                                 <div className="sub">
                                     <Link to="/my-course">Khóa học của tôi</Link>
-                                    <Link to="/profile">Thông tin tài khoản</Link>
+                                    <Link to="profile">Thông tin tài khoản</Link>
                                     <Link to="/" onClick={logout}>Đăng xuất</Link>
                                 </div>
                             </div> :

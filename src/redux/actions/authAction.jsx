@@ -1,5 +1,6 @@
 import Error from "../../page/404"
 import Auth from "../../service/auth"
+import authReducer from "../reducer/authReducer"
 import { ERROR, LOGIN, LOGOUT } from "../type"
 
 export function loginAction(data, success) {
@@ -23,5 +24,11 @@ export function loginAction(data, success) {
 export function logoutAction() {
     return {
         type: LOGOUT
+    }
+}
+export function updateAction(data) {
+    return async (dispath) => {
+        let res = await Auth.update(data)
+
     }
 }

@@ -79,9 +79,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/team' component={Team} />
-            <Route path='/profile'>
-              <Profile />
-            </Route>
+            <PrivateRouter path='/profile' component={Profile} />
             <Route path='/course-detail/:slug' component={CourseDetail} />
             <Route path='/pay' component={Pay} />
             <PrivateRouter path='/register/:slug' component={Register} />

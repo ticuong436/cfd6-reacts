@@ -36,15 +36,15 @@ export function CourselItem({ title, short_description, thumbnail, teacher, cour
                         {short_description}
                     </p>
                 </div>
-                <Link to={`register/${slug}`} className="bottom">
+                <div className="bottom">
                     <div className="teacher">
                         <div className="avatar">
                             <img src={teacher.avatar.link} alt="" />
                         </div>
                         <div className="name">{teacher.title}</div>
                     </div>
-                    <div to={`register/${slug}`} className="register-btn">Đăng Ký</div>
-                </Link>
+                    <Link to={`register/${slug}`} className="register-btn">Đăng Ký</Link>
+                </div>
             </div>
         </div>
 

@@ -28,7 +28,7 @@ export function Nav() {
                     <NavLink onClick={closeNav} to="team">CFD Team</NavLink>
                 </li>
                 <li>
-                    <NavLink onClick={closeNav} to="course-detail">Khóa Học</NavLink>
+                    <NavLink onClick={closeNav} to="my-course">Khóa Học</NavLink>
                 </li>
                 <li>
                     <NavLink onClick={closeNav} to="project">Dự Án</NavLink>

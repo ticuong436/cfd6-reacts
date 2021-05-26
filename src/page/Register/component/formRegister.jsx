@@ -1,11 +1,18 @@
+import { useParams } from "react-router";
 import useFormValidate from "../../../hook/useFormValidate"
+import Auth from "../../../service/auth"
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+export default function Register({ title, money, payload }) {
 
-export default function Register({ title }) {
+    let dispath = useDispatch()
+    let { statusRegister } = useSelector(store => store.authReducer)
+    let { slug } = useParams()
     let { form, inputChange, error, check } = useFormValidate({
         name: '',
         phone: '',
         email: '',
-        url: '',
+        fb: '',
         option: ''
 
     }, {
@@ -21,9 +28,9 @@ export default function Register({ title }) {
                 required: true,
                 pattern: 'email'
             },
-            url: {
+            fb: {
                 required: true,
-                // pattern: /^(?:http(s)?:\/\/)?www.facebook.com\/\/[\w.-]+$/i
+                pattern: /^(?:http(s)?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/
 
             },
             option: {
@@ -43,7 +50,7 @@ export default function Register({ title }) {
                 required: 'Email không được để trống',
                 pattern: 'Địa chỉ Email không đúng'
             },
-            url: {
+            fb: {
                 required: 'Link FB không được để trống',
                 pattern: 'Đây không phải là Link FaceBook'
             }
@@ -51,25 +58,34 @@ export default function Register({ title }) {
 
         }
     })
-
-    function onSubmit() {
+    const [success, setSuccess] = useState("")
+    async function onSubmit() {
         let errorObj = check()
+
         if (Object.keys(errorObj).length === 0) {
             console.log(form);
-        }
 
+            let res = await Auth.register(form, slug)
+            if (res) {
+                dispath({
+                    type: "REGISTER",
+                    payload: res.success
+                })
+            }
+        }
     }
+
     return (
         <main className="register-course" id="main">
             <section>
                 <div className="container">
                     <div className="wrap container">
                         <div className="main-sub-title">ĐĂNG KÝ</div>
-                        <h1 className="main-title">Thực chiến front-end căn bản </h1>
+                        <h1 className="main-title">{title} </h1>
                         <div className="main-info">
                             <div className="date"><strong>Khai giảng:</strong> 15/11/2020</div>
                             <div className="time"><strong>Thời lượng:</strong> 18 buổi</div>
-                            <div className="time"><strong>Học phí:</strong> 6.000.000 VND</div>
+                            <div className="time"><strong>Học phí:</strong> {money}</div>
                         </div>
                         <div className="form">
                             <label>
@@ -82,9 +98,7 @@ export default function Register({ title }) {
                             <label>
                                 <p>Số điện thoại<span>*</span></p>
                                 <input value={form.phone} name="phone" onChange={inputChange} type="text" placeholder="Số điện thoại" />
-                                {
-                                    error.phone && <p className="error-text">{error.phone}</p>
-                                }
+
                             </label>
                             <label>
                                 <p>Email<span>*</span></p>
@@ -95,9 +109,9 @@ export default function Register({ title }) {
                             </label>
                             <label>
                                 <p>URL Facebook<span>*</span></p>
-                                <input value={form.url} name="url" onChange={inputChange} type="text" placeholder="https://facebook.com" />
+                                <input value={form.fb} name="fb" onChange={inputChange} type="text" placeholder="https://facebook.com" />
                                 {
-                                    error.url && <p className="error-text">{error.url}</p>
+                                    error.fb && <p className="error-text">{error.fb}</p>
                                 }
                             </label>
                             <label className="disable">
@@ -124,13 +138,17 @@ export default function Register({ title }) {
                                 <p>Ý kiến cá nhân</p>
                                 <input value={form.option} name="option" onChange={inputChange} type="text" placeholder="Mong muốn cá nhân và lịch bạn có thể học." />
                             </label>
+                            {statusRegister && <h2 style={{ color: 'green' }}>{statusRegister}</h2>}
+
                             <div className="btn main rect" onClick={onSubmit} >đăng ký</div>
+
                         </div>
+
                     </div>
                 </div>
             </section>
 
-        </main>
+        </main >
 
     )
 }
